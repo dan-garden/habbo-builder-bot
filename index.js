@@ -1,10 +1,18 @@
+const mouse = require("./mouse");
 const autoPlace = require("./auto-place.js");
+const args = process.argv.slice(2)
 
-const width = 13;
-const height = 8;
-const start = {x: 1010, y: 500};
+const layouts = {
+    "104": [13, 8],
+    "416": [26, 16]
+};
+
+const layout = "104";
+
+const delay = 800; //Fresh
 // const delay = 400; //My retro
-const delay = 750; //Fresh
-const count = 700;
+const count = parseInt(args[0]) || 500;
 
-autoPlace(width, height, start, delay, count);
+mouse.position().then(start => {
+    autoPlace(layouts[layout][0], layouts[layout][1], start, delay, count, true);
+});
